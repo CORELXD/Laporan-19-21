@@ -147,6 +147,21 @@ const handleUpdate = async (e) => {
   }
 };
 
+const handleDelete = (id) => {
+  axios
+    .delete(`http://localhost:3000/api/mhs/delete/${id}`)
+    .then((response) => {
+      console.log('Data Berhasil Dihapus');
+
+      const updateMhs = mhs.filter((item) => item.id !== id);
+      setMhs(updateMhs);
+    })
+    .catch((error) => {
+      console.error('Gagal mengahapus Data :', error);
+      alert('Gagal Mengapus Data. Silakan Coba lagi atau Hubungi Admin.');
+  });
+};
+
   return (
     <Container>
       <Row>
@@ -165,6 +180,7 @@ const handleUpdate = async (e) => {
               <th scope="col">Jurusan</th>
               <th scope="col">gambar</th>
               <th scope="col">swa_foto</th>
+              <th scope="col" colspan={2}>Aksi</th>
             </tr>
           </thead>
 
@@ -182,6 +198,7 @@ const handleUpdate = async (e) => {
                   <img src={url + mh.swa_foto} height="100" />
                 </td>
                 <td><button onClick={() => handleShowEditModal(mh)} className="btn btn-sm btn-info">EDIT</button></td>
+                <td><button onClick={() => handleDelete(mh.id)} className="btn btn-sm btn-danger">Hapus</button></td>
               </tr>
             ))}
           </tbody>
