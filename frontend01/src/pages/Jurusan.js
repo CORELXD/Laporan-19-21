@@ -3,6 +3,9 @@ import { Container, Row, Col, Table, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const token = localStorage.getItem('token');
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 function Jurusan() {
   const [jrs, setJrsn] = useState([]);
   const [show, setShow] = useState(false);
@@ -19,6 +22,9 @@ function Jurusan() {
   }, []);
 
   const fetchData = async () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     try {
       const response = await axios.get("http://localhost:3000/api/jurusan");
       const data = response.data.data;
@@ -85,7 +91,11 @@ function Jurusan() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/api/jurusan/delete/${id}`)
+      .delete(`http://localhost:3000/api/jurusan/delete/${id}`,{
+        headers: {
+        Authorization: `Bearer ${token}`,
+       }
+      })
       .then((response) => {
         fetchData();
         console.log("Data Berhasil Dihapus");

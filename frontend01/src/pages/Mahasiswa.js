@@ -3,6 +3,8 @@ import { Container, Row, Col, Table, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+const token = localStorage.getItem('token');
+
 
 function Mahasiswa() {
   const [mhs, setMhs] = useState([]);
@@ -23,15 +25,18 @@ function Mahasiswa() {
 
   const fectData = async () => {
     try {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
       const response1 = await axios.get("http://localhost:3000/api/mhs");
-      const data1 = await response1.data.data;
-      setMhs(data1);
-
       const response2 = await axios.get("http://localhost:3000/api/jurusan");
+      const data1 = await response1.data.data;
       const data2 = await response2.data.data;
+      setMhs(data1);
       setJrsn(data2);
+      
     } catch (error) {
-      console.error("Kesalahan: ", error);
+      console.error("Kesalahan Mengambil Data: ", error);
     }
   };
 
@@ -78,6 +83,7 @@ function Mahasiswa() {
       await axios.post("http://localhost:3000/api/mhs/store", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          'Authorization': `Bearer ${token}`,
         },
       });
       navigate("/mhs");
@@ -136,6 +142,7 @@ const handleUpdate = async (e) => {
     await axios.patch(`http://localhost:3000/api/mhs/update/${editData.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`,
       },
     });
     navigate('/mhs');
@@ -149,7 +156,12 @@ const handleUpdate = async (e) => {
 
 const handleDelete = (id) => {
   axios
-    .delete(`http://localhost:3000/api/mhs/delete/${id}`)
+    .delete(`http://localhost:3000/api/mhs/delete/${id}`, {
+      headers: {
+      Authorization: `Bearer ${token}`,
+     }
+    })
+    
     .then((response) => {
       console.log('Data Berhasil Dihapus');
 
