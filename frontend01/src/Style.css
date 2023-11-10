@@ -1,0 +1,60 @@
+/* Navbar styling */
+
+.navbar {
+    background-color: #f8f9fa; /* Warna latar belakang */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek 3D yang lebih jelas */
+    padding: 15px 20px; /* Padding yang lebih nyaman */
+}
+
+.navbar-brand {
+    font-size: 26px; /* Ukuran font lebih besar */
+    color: #333; /* Warna teks */
+    text-transform: uppercase; /* Text dalam huruf besar */
+    letter-spacing: 1px; /* Spasi antar huruf */
+}
+
+.navbar-toggler {
+    border: none; /* Hapus border tombol toggle */
+    outline: none; /* Hapus outline agar lebih halus */
+}
+
+.nav-link {
+    color: #333; /* Warna teks untuk link */
+    margin-right: 25px; /* Jarak antar link yang lebih luas */
+    transition: color 0.3s; /* Transisi saat berubah warna */
+    font-weight: 500; /* Ketebalan font */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Warna saat dihover */
+}
+
+/* Animasi lebih smooth saat hover */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Menambahkan gaya pada link saat mendapat fokus */
+.nav-link:focus {
+    color: #007bff; /* Warna yang berbeda saat fokus */
+}
+
+
+
