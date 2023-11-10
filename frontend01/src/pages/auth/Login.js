@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 function Login() {
   const navigate = useNavigate();
@@ -28,31 +29,35 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      <h1 className="mt-5">Login</h1>
+    <div className="container" style={{ background: 'lightblue', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: '50%', backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)' }}>
+      <h1 style={{ textAlign: 'center', color: '#333', fontSize: '2rem' }}>Login</h1>
       <div className="form-group">
-        <label>Username:</label>
+        <label style={{ color: '#333', marginBottom: '5px', display: 'block' }}>Username:</label>
         <input
           className="form-control"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          style={{ borderRadius: '5px', marginBottom: '15px', padding: '8px' }}
         />
       </div>
       <div className="form-group">
-        <label>Password:</label>
+        <label style={{ color: '#333', marginBottom: '5px', display: 'block' }}>Password:</label>
         <input
           className="form-control"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          style={{ borderRadius: '5px', marginBottom: '15px', padding: '8px' }}
         />
       </div>
-      <button className="btn btn-primary mt-2" onClick={handleLogin}>
+      <button className="btn btn-success" onClick={handleLogin} style={{ borderRadius: '5px', padding: '8px 20px', marginRight: '10px' }}>
         Login
       </button>
-      <p className="mt-2">Belum punya akun? <a href="/register">Daftar</a></p>
+      <p style={{ color: '#', marginTop: '10px', textAlign: 'center' }}>Belum punya akun? <Link to="/register" style={{ color: '#007bff', textDecoration: 'none' }}>Daftar</Link></p>
     </div>
+  </div>
   );
 }
 

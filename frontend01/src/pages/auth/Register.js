@@ -19,6 +19,7 @@ function Register() {
         username: username,
         password: password,
       });
+
       console.log('Pendaftaran berhasil:', response.data);
       navigate('/login');
     } catch (error) {
@@ -28,32 +29,32 @@ function Register() {
   };
 
   return (
-    <div className="container">
-      <h2 className="mt-5">Form Pendaftaran</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <div className="form-group">
-        <label>Username: </label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'lightblue'  }}>
+      <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)' }}>
+        <h2 style={{ textAlign: 'center', color: '#333' }}>Form Pendaftaran</h2>
+        {error && <div className="alert alert-danger" style={{ background: 'red', color: 'white', padding: '10px', borderRadius: '5px' }}>{error}</div>}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', marginBottom: '15px', width: '300px', textAlign: 'center' }}
+          />
+          <input
+            className="form-control"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '8px', marginBottom: '15px', width: '300px', textAlign: 'center' }}
+          />
+          <button onClick={handleRegister} style={{ padding: '8px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#2E8B57', color: '#fff', cursor: 'pointer', margin: '8px'}}>
+            Daftar
+          </button>
+        </div>
       </div>
-      <div className="form-group">
-        <label>Password: </label>
-        <input
-          className="form-control"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className="btn btn-primary mt-2" onClick={handleRegister}>
-        Daftar
-      </button>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import '../Style.css';
+import '../Style.css'
 import Mahasiswa from '../pages/Mahasiswa';
 import Jurusan from '../pages/Jurusan';
 import Login from '../pages/auth/Login';
@@ -19,7 +19,7 @@ const handleLogout = () => {
     return (
         <Router>
         <div>
-        <nav className="navbar navbar-expand-lg navbar-light" style={{ background: '#fff' }}>
+        <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: 'secondary' }}>
     <div className="container-fluid">
     <Link className="navbar-brand" to="/" style={{ color: '#333', marginLeft: '20px' }}>Web Santai</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,6 @@ const handleLogout = () => {
         </div>
     </div>
 </nav>
-
 
 
 

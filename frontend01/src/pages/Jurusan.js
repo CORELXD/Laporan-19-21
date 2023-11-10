@@ -107,100 +107,93 @@ function Jurusan() {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h2>Data Jurusan</h2>
-          <Button variant="primary" onClick={handleShow}>
-            Tambah
-          </Button>
-        </Col>
-      </Row>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama Jurusan</th>
-            <th scope="col" colSpan={2}>
-              Aksi
-            </th>
+    <Container style={{ margin: '50px auto', padding: '30px', background: '#f5f5f5', borderRadius: '8px', boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)' }}>
+    <Row className="mb-3">
+      <Col>
+        <h2>Data Jurusan</h2>
+        <Button variant="success" onClick={handleShow}>
+          Tambah
+        </Button>
+      </Col>
+    </Row>
+    <Table bordered hover>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Jurusan</th>
+          <th colSpan={2}>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {jrs.map((jurusan, index) => (
+          <tr key={jurusan.id_j}>
+            <td>{index + 1}</td>
+            <td>{jurusan.nama_jurusan}</td>
+            <td>
+              <Button variant="info" onClick={() => handleShowEditModal(jurusan)}>
+                EDIT
+              </Button>
+            </td>
+            <td>
+              <Button variant="danger" onClick={() => handleDelete(jurusan.id_j)}>
+                Hapus
+              </Button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {jrs.map((jurusan, index) => (
-            <tr key={jurusan.id_j}>
-              <td>{index + 1}</td>
-              <td>{jurusan.nama_jurusan}</td>
-              <td>
-                <button
-                  onClick={() => handleShowEditModal(jurusan)}
-                  className="btn btn-sm btn-info"
-                >
-                  EDIT
-                </button>
-              </td>
-              <td>
-                <button
-                  onClick={() => handleDelete(jurusan.id_j)}
-                  className="btn btn-sm btn-danger"
-                >
-                  Hapus
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Tambah Data Jurusan</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Nama Jurusan:</label>
-              <input
-                type="text"
-                className={`form-control ${validation.nama_jurusan ? "is-invalid" : ""}`}
-                value={namaJurusan}
-                onChange={handleNamaJurusanChange}
-              />
-              {validation.nama_jurusan && (
-                <div className="invalid-feedback">{validation.nama_jurusan[0]}</div>
-              )}
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Kirim
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal>
-
-      <Modal show={showEditModal} onHide={handleCloseEditModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Data Jurusan</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleUpdate}>
-            <div className="mb-3">
-              <label className="form-label">Nama Jurusan:</label>
-              <input
-                type="text"
-                className={`form-control ${validation.nama_jurusan ? "is-invalid" : ""}`}
-                value={editData.nama_jurusan}
-                onChange={(e) => handleEditDataChange("nama_jurusan", e.target.value)}
-              />
-              {validation.nama_jurusan && (
-                <div className="invalid-feedback">{validation.nama_jurusan[0]}</div>
-              )}
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Simpan Perubahan
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal>
-    </Container>
+        ))}
+      </tbody>
+    </Table>
+  
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Tambah Data Jurusan</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Nama Jurusan:</label>
+            <input
+              type="text"
+              className={`form-control ${validation.nama_jurusan ? "is-invalid" : ""}`}
+              value={namaJurusan}
+              onChange={handleNamaJurusanChange}
+            />
+            {validation.nama_jurusan && (
+              <div className="invalid-feedback">{validation.nama_jurusan[0]}</div>
+            )}
+          </div>
+          <Button variant="primary" type="submit">
+            Kirim
+          </Button>
+        </form>
+      </Modal.Body>
+    </Modal>
+  
+    <Modal show={showEditModal} onHide={handleCloseEditModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Edit Data Jurusan</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form onSubmit={handleUpdate}>
+          <div className="mb-3">
+            <label className="form-label">Nama Jurusan:</label>
+            <input
+              type="text"
+              className={`form-control ${validation.nama_jurusan ? "is-invalid" : ""}`}
+              value={editData.nama_jurusan}
+              onChange={(e) => handleEditDataChange("nama_jurusan", e.target.value)}
+            />
+            {validation.nama_jurusan && (
+              <div className="invalid-feedback">{validation.nama_jurusan[0]}</div>
+            )}
+          </div>
+          <Button variant="primary" type="submit">
+            Simpan Perubahan
+          </Button>
+        </form>
+      </Modal.Body>
+    </Modal>
+  </Container>  
   );
 }
 

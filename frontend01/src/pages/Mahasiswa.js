@@ -175,68 +175,77 @@ const handleDelete = (id) => {
 };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h2>Data Mahasiswa</h2>
-          <Button variant="primary" onClick={handleShow}>
-            Tambah
-          </Button>
-        </Col>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Nrp</th>
-              <th scope="col">Jurusan</th>
-              <th scope="col">gambar</th>
-              <th scope="col">swa_foto</th>
-              <th scope="col" colspan={2}>Aksi</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {mhs.map((mh, index) => (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{mh.nama}</td>
-                <td>{mh.nrp}</td>
-                <td>{mh.jurusan}</td>
-                <td>
-                  <img src={url + mh.gambar} height="100" />
-                </td>
-                <td>
-                  <img src={url + mh.swa_foto} height="100" />
-                </td>
-                <td><button onClick={() => handleShowEditModal(mh)} className="btn btn-sm btn-info">EDIT</button></td>
-                <td><button onClick={() => handleDelete(mh.id)} className="btn btn-sm btn-danger">Hapus</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Row>
-      <Row>
-        <Table striped bordered hover>
-          {/* Tabel Mahasiswa */}
-        </Table>
-      </Row>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Tambah Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Nama:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={nama}
-                onChange={handleNamaChange}
-              />
-            </div>
-            <div className="mb-3">
+    <Container style={{ margin: '50px auto', padding: '30px', background: '#f5f5f5', borderRadius: '8px', boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)' }}>
+  <Row className="mb-3">
+    <Col>
+      <h2>Data Mahasiswa</h2>
+      <Button variant="success" onClick={handleShow}>
+        Tambah
+      </Button>
+    </Col>
+  </Row>
+  <table className="table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>NRP</th>
+        <th>Jurusan</th>
+        <th>Gambar</th>
+        <th>Swa Foto</th>
+        <th colSpan={2}>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {mhs.map((mh, index) => (
+        <tr key={mh.id}>
+          <td>{index + 1}</td>
+          <td>{mh.nama}</td>
+          <td>{mh.nrp}</td>
+          <td>{mh.jurusan}</td>
+          <td>
+            <img src={url + mh.gambar} height="100" alt="gambar" />
+          </td>
+          <td>
+            <img src={url + mh.swa_foto} height="100" alt="swa-foto" />
+          </td>
+          <td>
+            <Button variant="info" onClick={() => handleShowEditModal(mh)}>
+              Edit
+            </Button>
+          </td>
+          <td>
+            <Button variant="danger" onClick={() => handleDelete(mh.id)}>
+              Hapus
+            </Button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  
+  <Row>
+    <Table striped bordered hover>
+      {/* Tabel Mahasiswa */}
+    </Table>
+  </Row>
+  
+  <Modal show={show} onHide={handleClose}>
+    <Modal.Header closeButton>
+      <Modal.Title>Tambah Data</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Nama:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={nama}
+            onChange={handleNamaChange}
+          />
+        </div>
+        <div className="mb-3">
               <label className="form-label">NRP:</label>
               <input
                 type="text"
@@ -277,33 +286,29 @@ const handleDelete = (id) => {
                 onChange={handleSwaFotoChange}
               />
             </div>
-            <button
-              onClick={handleClose}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Kirim
-            </button>
-          </form>
-        </Modal.Body>
-      </Modal>
+        <Button variant="primary" type="submit">
+          Kirim
+        </Button>
+      </form>
+    </Modal.Body>
+  </Modal>
 
-      <Modal show={showEditModal} onHide={handleCloseEditModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleUpdate}>
-            <div className="mb-3">
-              <label className="form-label">Nama:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={editData ? editData.nama : ''}
-                onChange={(e) => handleEditDataChange ('nama', e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
+  <Modal show={showEditModal} onHide={handleCloseEditModal}>
+    <Modal.Header closeButton>
+      <Modal.Title>Edit Data</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <form onSubmit={handleUpdate}>
+        <div className="mb-3">
+          <label className="form-label">Nama:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={editData ? editData.nama : ''}
+            onChange={(e) => handleEditDataChange ('nama', e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
               <label className="form-label">NRP:</label>
               <input
                 type="text"
@@ -348,15 +353,14 @@ const handleDelete = (id) => {
                 onChange={(e) => handleEditDataChange ('swa_foto', e.target.files[0])}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary">
-              Simpan Perubahan
-            </button>
-          </form>
-        </Modal.Body>
-        </Modal>
-    </Container>
+        <Button variant="primary" type="submit">
+          Simpan Perubahan
+        </Button>
+      </form>
+    </Modal.Body>
+  </Modal>
+</Container>
+
   );
 }
 
